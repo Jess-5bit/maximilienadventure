@@ -1,0 +1,148 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://interfaces/loading/LoadingScreen.gd" type="Script" id=1]
+[ext_resource path="res://environment/clouds/assets/bg_cloud6.png" type="Texture" id=2]
+[ext_resource path="res://environment/clouds/assets/bg_cloud7.png" type="Texture" id=3]
+[ext_resource path="res://environment/clouds/assets/bg_cloud8.png" type="Texture" id=4]
+[ext_resource path="res://interfaces/assets/opp_aviator.png" type="Texture" id=5]
+[ext_resource path="res://theme/fonts/resources/pixelmix.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://interfaces/assets/texture.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "FadeIn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "FadeOut"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "go_to_scene"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, 71 ), Vector2( 64, 76 ) ]
+}
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 6 )
+
+[node name="LoadingScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 1 )
+anims/FadeOut = SubResource( 2 )
+
+[node name="AnimationPlayerPlane" type="AnimationPlayer" parent="."]
+anims/Fly = SubResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.372549, 0.803922, 0.894118, 1 )
+
+[node name="Cloud" type="TextureRect" parent="."]
+margin_left = -15.0
+margin_top = -46.0
+margin_right = 497.0
+margin_bottom = 165.0
+texture = ExtResource( 2 )
+
+[node name="Cloud2" type="TextureRect" parent="."]
+margin_left = 35.0
+margin_top = 216.0
+margin_right = 547.0
+margin_bottom = 427.0
+texture = ExtResource( 3 )
+
+[node name="Cloud3" type="TextureRect" parent="."]
+margin_left = 377.0
+margin_top = 173.0
+margin_right = 889.0
+margin_bottom = 384.0
+texture = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 64.0
+margin_top = 71.6328
+margin_right = 416.0
+margin_bottom = 199.633
+texture = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -80.0
+margin_right = 150.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 4 )
+text = "LOADING"
+align = 1
+
+[node name="ProgressBar" type="TextureProgress" parent="VBoxContainer"]
+margin_top = 20.0
+margin_right = 300.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 300, 8 )
+texture_progress = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="."]

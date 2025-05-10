@@ -1,0 +1,626 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://interfaces/menu/Menu.gd" type="Script" id=1]
+[ext_resource path="res://interfaces/assets/Background by ansimuz.png" type="Texture" id=2]
+[ext_resource path="res://interfaces/buttons/SettingsButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://interfaces/label/Title.tscn" type="PackedScene" id=4]
+[ext_resource path="res://theme/fonts/text.font.normal.small.tres" type="DynamicFont" id=5]
+[ext_resource path="res://interfaces/containers/MenuVBoxContainer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://interfaces/buttons/QuitButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://interfaces/menu/ProfilesLoader.gd" type="Script" id=8]
+[ext_resource path="res://interfaces/buttons/AltPixelButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://interfaces/menu/Profile.tscn" type="PackedScene" id=10]
+[ext_resource path="res://theme/fonts/text.font.normal.large.tres" type="DynamicFont" id=11]
+[ext_resource path="res://interfaces/label/PixelLabel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://interfaces/buttons/CreditsButton.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Default"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Author:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Profiles:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Profiles/Profile0")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "focus"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ProfileSettings:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Validation:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SettingsButton:rect_position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 229 ) ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_toggle_button_sound"
+}, {
+"args": [ true ],
+"method": "_toggle_button_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "ProfileSelected"
+length = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("ProfileSettings/Container/ContinueBtn")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grab_focus"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ProfileSettings:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -480, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ProfileSettings:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "ProfileSelectedNo"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("ProfileSettings:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -480, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ProfileSettings:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Setup"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Author:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Profiles:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ProfileSettings:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Validation:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsButton:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 229 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Validation:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -480, 32 ), Vector2( 0, 32 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Validation/Container/YesBtn")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grab_focus"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Validation:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Validation:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 32 ), Vector2( -480, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Validation:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("ProfileSettings/Container/DeleteBtn")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grab_focus"
+} ]
+}
+
+[sub_resource type="ButtonGroup" id=7]
+
+[sub_resource type="ButtonGroup" id=8]
+
+[sub_resource type="ButtonGroup" id=9]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Default"
+anims/Default = SubResource( 1 )
+anims/ProfileSelected = SubResource( 2 )
+anims/ProfileSelectedNo = SubResource( 3 )
+anims/Setup = SubResource( 4 )
+anims/Validation = SubResource( 5 )
+anims/ValidationNo = SubResource( 6 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_top = -25.0
+margin_right = 480.0
+margin_bottom = 296.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" parent="." instance=ExtResource( 4 )]
+margin_left = 60.0
+margin_top = 5.0
+margin_right = -68.0
+margin_bottom = 41.5598
+text = "Maximilien Adventure"
+
+[node name="Author" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -195.0
+margin_top = -240.0
+margin_right = -125.0
+margin_bottom = -226.0
+custom_fonts/font = ExtResource( 5 )
+text = "by @levrault"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Version" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -31.0
+margin_top = -267.0
+margin_right = -2.0
+margin_bottom = -253.0
+custom_fonts/font = ExtResource( 5 )
+text = "v1.1.2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Profiles" parent="." instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -166.0
+margin_top = -86.0
+margin_right = 164.0
+margin_bottom = 94.0
+custom_constants/separation = 71
+script = ExtResource( 8 )
+
+[node name="Profile0" parent="Profiles" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 330.0
+margin_bottom = 0.0
+
+[node name="PixelButton" parent="Profiles/Profile0/Parchment" index="0"]
+focus_neighbour_top = NodePath("../../../../QuitButton")
+focus_neighbour_bottom = NodePath("../../../Profile1/Parchment/PixelButton")
+group = SubResource( 7 )
+
+[node name="Profile1" parent="Profiles" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 71.0
+margin_right = 330.0
+margin_bottom = 71.0
+profile_save = "profile1"
+
+[node name="PixelButton" parent="Profiles/Profile1/Parchment" index="0"]
+focus_neighbour_top = NodePath("../../../Profile0/Parchment/PixelButton")
+focus_neighbour_bottom = NodePath("../../../Profile2/Parchment/PixelButton")
+group = SubResource( 8 )
+
+[node name="Profile2" parent="Profiles" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 142.0
+margin_right = 330.0
+margin_bottom = 142.0
+profile_save = "profile2"
+
+[node name="PixelButton" parent="Profiles/Profile2/Parchment" index="0"]
+focus_neighbour_left = NodePath("../../../../SettingsButton")
+focus_neighbour_top = NodePath("../../../Profile1/Parchment/PixelButton")
+focus_neighbour_right = NodePath("../../../../CreditsButton")
+group = SubResource( 9 )
+
+[node name="QuitButton" parent="." instance=ExtResource( 7 )]
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Profiles/Profile0/Parchment/PixelButton")
+focus_neighbour_bottom = NodePath("../Profiles/Profile0/Parchment/PixelButton")
+
+[node name="SettingsButton" parent="." instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_right = 0.09
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = -41.0
+margin_right = -0.200001
+margin_bottom = -1.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Profiles/Profile2/Parchment/PixelButton")
+focus_neighbour_bottom = NodePath(".")
+
+[node name="CreditsButton" parent="." instance=ExtResource( 13 )]
+margin_left = -47.0
+margin_right = -7.0
+focus_neighbour_left = NodePath("../Profiles/Profile2/Parchment/PixelButton")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+
+[node name="ProfileSettings" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -480.0
+margin_right = -480.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="ProfileSettings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -3.05176e-05
+color = Color( 0.0352941, 0.0352941, 0.0352941, 0.941176 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PixelLabel" parent="ProfileSettings" instance=ExtResource( 12 )]
+anchor_right = 1.0
+margin_left = 1.0
+margin_top = 64.0
+margin_right = 1.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 11 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 1
+
+[node name="Container" type="VBoxContainer" parent="ProfileSettings"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -3.0
+margin_bottom = 17.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="ContinueBtn" parent="ProfileSettings/Container" instance=ExtResource( 9 )]
+margin_right = 480.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../DeleteBtn")
+focus_next = NodePath("../DeleteBtn")
+text = "UI_CONTINUE_GAME"
+
+[node name="DeleteBtn" parent="ProfileSettings/Container" instance=ExtResource( 9 )]
+margin_top = 40.0
+margin_right = 480.0
+margin_bottom = 60.0
+focus_neighbour_top = NodePath("../ContinueBtn")
+focus_neighbour_bottom = NodePath("../ReturnProfileBtn")
+text = "UI_DELETE_GAME"
+
+[node name="ReturnProfileBtn" parent="ProfileSettings/Container" instance=ExtResource( 9 )]
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 100.0
+focus_neighbour_top = NodePath("../DeleteBtn")
+text = "UI_CHOOSE_ANOTHER_GAME"
+
+[node name="Validation" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -480.0
+margin_top = 32.0
+margin_right = -480.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Validation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 46.0
+margin_bottom = -112.0
+color = Color( 0.247059, 0.247059, 0.454902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PixelLabel" parent="Validation" instance=ExtResource( 12 )]
+anchor_right = 1.0
+margin_left = 1.0
+margin_top = 64.0
+margin_right = 1.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 11 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "UI_ARE_YOU_SURE"
+align = 1
+
+[node name="Container" type="HBoxContainer" parent="Validation"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -10.0
+margin_bottom = 10.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YesBtn" parent="Validation/Container" instance=ExtResource( 9 )]
+margin_left = 125.0
+margin_right = 235.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../NoBtn")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../NoBTN")
+text = "COMMON_YES"
+
+[node name="NoBtn" parent="Validation/Container" instance=ExtResource( 9 )]
+margin_left = 255.0
+margin_right = 354.0
+focus_neighbour_left = NodePath("../YesBtn")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+text = "COMMON_NO"
+
+[editable path="Profiles/Profile0"]
+
+[editable path="Profiles/Profile1"]
+
+[editable path="Profiles/Profile2"]

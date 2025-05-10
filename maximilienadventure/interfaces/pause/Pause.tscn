@@ -1,0 +1,350 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://interfaces/pause/Pause.gd" type="Script" id=1]
+[ext_resource path="res://interfaces/assets/Worn-Parchment-BG-2.png" type="Texture" id=2]
+[ext_resource path="res://interfaces/assets/opp_promo_traveler_filter.png" type="Texture" id=3]
+[ext_resource path="res://interfaces/label/Title.tscn" type="PackedScene" id=4]
+[ext_resource path="res://interfaces/containers/MenuVBoxContainer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://interfaces/buttons/PixelButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://interfaces/buttons/RestartLevel.gd" type="Script" id=7]
+[ext_resource path="res://interfaces/buttons/OverWorldBtn.gd" type="Script" id=8]
+[ext_resource path="res://interfaces/buttons/QuitBtn.gd" type="Script" id=9]
+[ext_resource path="res://audio/general-sounds/pause-sounds/sfx_sounds_pause4_in.wav" type="AudioStream" id=10]
+[ext_resource path="res://audio/general-sounds/pause-sounds/sfx_sounds_pause4_out.wav" type="AudioStream" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "SETUP"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "TransitionIn"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -275 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.133333, 0.12549, 0.203922, 0.588235 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "_set_pause"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_hide_other_ui"
+} ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("Background/VBoxContainer/Resume")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grab_focus"
+} ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:stream")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AudioStreamPlayer:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_toggle_button_sound"
+}, {
+"args": [ true ],
+"method": "_toggle_button_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "TransitionOut"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -275 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.05, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.133333, 0.12549, 0.203922, 0.588235 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_set_pause"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "_hide_other_ui"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_toggle_button_sound"
+} ]
+}
+
+[node name="Pause" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/SETUP = SubResource( 1 )
+anims/TransitionIn = SubResource( 2 )
+anims/TransitionOut = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1.0
+color = Color( 0.133333, 0.12549, 0.203922, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+margin_bottom = 3.0
+texture = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+margin_left = 33.9719
+margin_top = 146.122
+margin_right = 232.972
+margin_bottom = 419.122
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+
+[node name="Title" parent="Background" instance=ExtResource( 4 )]
+text = "UI_PAUSE_TITLE"
+
+[node name="VBoxContainer" parent="Background" instance=ExtResource( 5 )]
+margin_left = 1.1376
+margin_top = -56.1695
+margin_right = 1.1376
+margin_bottom = 107.83
+alignment = 1
+
+[node name="Resume" parent="Background/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 18.0
+margin_right = 472.0
+margin_bottom = 38.0
+text = "UI_RESUME"
+
+[node name="RestartLevel" parent="Background/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 54.0
+margin_right = 472.0
+margin_bottom = 74.0
+text = "UI_RESTART_LEVEL"
+script = ExtResource( 7 )
+
+[node name="OverWorld" parent="Background/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 90.0
+margin_right = 472.0
+margin_bottom = 110.0
+text = "UI_RETURN_OVERWORLD"
+script = ExtResource( 8 )
+
+[node name="Quit" parent="Background/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 126.0
+margin_right = 472.0
+margin_bottom = 146.0
+text = "UI_QUIT"
+script = ExtResource( 9 )

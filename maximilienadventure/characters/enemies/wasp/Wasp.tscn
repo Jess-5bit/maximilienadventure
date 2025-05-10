@@ -1,0 +1,259 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://characters/enemies/wasp/Wasp.gd" type="Script" id=1]
+[ext_resource path="res://engine/Physics2D.gd" type="Script" id=2]
+[ext_resource path="res://characters/enemies/HitBox.gd" type="Script" id=3]
+[ext_resource path="res://characters/enemies/BouncingZone.gd" type="Script" id=4]
+[ext_resource path="res://characters/enemies/wasp/sprites/spr_wasp_idle_anim-Sheet.png" type="Texture" id=5]
+[ext_resource path="res://characters/enemies/wasp/states/motion/on-air/idle.gd" type="Script" id=6]
+[ext_resource path="res://characters/enemies/wasp/states/motion/on-air/alert.gd" type="Script" id=7]
+[ext_resource path="res://effects/ExclamationPoint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://characters/enemies/wasp/states/motion/on-air/resting.gd" type="Script" id=9]
+[ext_resource path="res://characters/enemies/wasp/states/motion/on-air/patrol.gd" type="Script" id=10]
+[ext_resource path="res://characters/enemies/wasp/states/motion/on-air/retreat.gd" type="Script" id=11]
+[ext_resource path="res://statemachine/states/motion/combat/death.gd" type="Script" id=12]
+[ext_resource path="res://tools/draw-circle.gd" type="Script" id=13]
+[ext_resource path="res://tools/draw-state.gd" type="Script" id=14]
+[ext_resource path="res://theme/fonts/text.font.normal.tres" type="DynamicFont" id=15]
+[ext_resource path="res://effects/ExplosionAirAlt.tscn" type="PackedScene" id=16]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Death"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("ExplosionAirAlt")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExplosionAirAlt:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_drop_health_pack"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "SETUP"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ExplosionAirAlt:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 24.3739
+height = 0.152431
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 23.8874, 22.1103 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 33.0533, 8.9377 )
+
+[node name="Wasp" type="KinematicBody2D"]
+z_index = 2
+collision_layer = 4
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "SETUP"
+anims/Death = SubResource( 1 )
+anims/Idle = SubResource( 2 )
+anims/SETUP = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Physics2D" type="Node2D" parent="."]
+script = ExtResource( 2 )
+GRAVITY = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.99678, 5.98062 )
+shape = SubResource( 4 )
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2( -0.138885, 0 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( -0.429276, 9.22946 )
+shape = SubResource( 5 )
+
+[node name="JumpingDamageZone" type="Area2D" parent="."]
+position = Vector2( 1.04923, 8.69363 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpingDamageZone"]
+position = Vector2( -0.644607, -20.5486 )
+shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+hframes = 11
+
+[node name="ExplosionAirAlt" parent="." instance=ExtResource( 16 )]
+visible = false
+scale = Vector2( 1.5, 1.5 )
+
+[node name="States" type="Node2D" parent="."]
+
+[node name="Idle" type="Node2D" parent="States"]
+script = ExtResource( 6 )
+
+[node name="Alert" type="Node2D" parent="States"]
+script = ExtResource( 7 )
+
+[node name="ExclamationPoint" parent="States/Alert" instance=ExtResource( 8 )]
+margin_left = -27.1984
+margin_top = -78.0169
+margin_right = 32.8016
+margin_bottom = -18.0169
+
+[node name="Timer" type="Timer" parent="States/Alert"]
+wait_time = 0.5
+
+[node name="Resting" type="Node2D" parent="States"]
+script = ExtResource( 9 )
+
+[node name="Timer" type="Timer" parent="States/Resting"]
+one_shot = true
+
+[node name="Patrol" type="Node2D" parent="States"]
+script = ExtResource( 10 )
+SPEED = 75.0
+ACCELERATION = 0.1
+PATROL_SPEED = 75.0
+
+[node name="Retreat" type="Node2D" parent="States"]
+script = ExtResource( 11 )
+
+[node name="Death" type="Node2D" parent="States"]
+script = ExtResource( 12 )
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="Patrol" type="Node2D" parent="Debug"]
+script = ExtResource( 13 )
+color = Color( 255, 255, 255, 255 )
+value = "FOLLOW_RANGE"
+
+[node name="DebugUI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="DebugUI"]
+margin_left = -18.4791
+margin_top = -48.2538
+margin_right = 21.5209
+margin_bottom = -34.2538
+custom_fonts/font = ExtResource( 15 )
+text = "State"
+align = 1
+valign = 1
